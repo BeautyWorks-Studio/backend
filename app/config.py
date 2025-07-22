@@ -5,3 +5,5 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'secret'
     JWT_SECRET_KEY = 'jwt-secret'
+class DevelopmentConfig(Config):
+    DEBUG = True

@@ -6,7 +6,7 @@ from flask_migrate import Migrate
 from dotenv import load_dotenv
 import os
 
-# Initialize extensions
+
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 jwt = JWTManager()
@@ -27,7 +27,7 @@ def create_app():
     
     from app.routes.auth_routes import auth_bp
     from app.routes.product_routes import product_bp
-    # from app import models
+    
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(product_bp, url_prefix='/api/products')
@@ -41,5 +41,7 @@ def create_app():
     with app.app_context():
         db.create_all()
 
+    import models
+     
     return app
 
