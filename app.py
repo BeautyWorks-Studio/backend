@@ -4,7 +4,10 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
+from dotenv import load_dotenv
 from config import Config
+
+load_dotenv()
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -20,5 +23,7 @@ def create_app():
     jwt.init_app(app)
     CORS(app)
     from app.routes import register_routes
+    from app import models
+
     register_routes(app)
     return app
