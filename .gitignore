@@ -1,18 +1,18 @@
-# Python
+
 __pycache__/
 *.py[cod]
 *.egg-info/
 *.egg
 *.log
 
-# Virtual environments
+
 venv/
 
-# Environment variables
+
 .env
 
-# VS Code
+
 .vscode/
 
-# MacOS
+
 .DS_Store
