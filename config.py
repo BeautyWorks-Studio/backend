@@ -1,0 +1,14 @@
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+import os
+
+db = SQLAlchemy()
+migrate = Migrate()
+basedir = os.path.abspath(os.path.dirname(__file__))
+class Config:
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = 'secret'
+    JWT_SECRET_KEY = 'jwt-secret'
+class DevelopmentConfig(Config):
+    DEBUG = True
