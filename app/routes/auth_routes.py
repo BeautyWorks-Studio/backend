@@ -1,21 +1,42 @@
 from flask import Blueprint, request, jsonify
+<<<<<<< HEAD
 from models.user import User
 from app.utils.auth import create_user, authenticate
+=======
+from app.models import User
+from app import db, bcrypt
+>>>>>>> 73a97c5 (modified app/_init_.py modified app/config.py modified app/routes/auth_routes.py modified app/routes/product_routes.py)
 from flask_jwt_extended import create_access_token
 
-auth_bp = Blueprint('auth_bp', __name__)
+auth_bp = Blueprint("auth_bp", __name__)
 
 @auth_bp.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
-    user = create_user(data['name'], data['email'], data['password'], data.get('role', 'user'))
-    return jsonify({"msg": "User created", "user": {"email": user.email, "role": user.role}}), 201
+    username = data.get("username")
+    email = data.get("email")
+    password = data.get("password")
+
+    if User.query.filter((User.username == username) | (User.email == email)).first():
+        return jsonify({"error": "User already exists"}), 400
+
+    hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
+    new_user = User(username=username, email=email, password_hash=hashed_password)
+
+    db.session.add(new_user)
+    db.session.commit()
+    return jsonify({"message": "User registered successfully"}), 201
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    user = authenticate(data['email'], data['password'])
-    if user:
-        token = create_access_token(identity=user.id)
-        return jsonify(access_token=token, role=user.role)
-    return jsonify({"msg": "Invalid credentials"}), 401
+    username = data.get("username")
+    password = data.get("password")
+
+    user = User.query.filter_by(username=username).first()
+    if user and bcrypt.check_password_hash(user.password_hash, password):
+        token = create_access_token(identity={"id": user.id, "username": user.username, "role": user.role})
+        return jsonify(access_token=token), 200
+
+    return jsonify({"error": "Invalid credentials"}), 401
+
