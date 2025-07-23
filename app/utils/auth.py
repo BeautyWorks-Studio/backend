@@ -1,4 +1,4 @@
-from app.models import User
+from models import User
 from app import db, bcrypt
 
 def create_user(username, password):
