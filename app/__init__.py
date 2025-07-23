@@ -2,7 +2,11 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
+
 from flask_migrate import Migrate
+
+from flask_cors import CORS
+
 from dotenv import load_dotenv
 from config import db
 from config import migrate
@@ -16,8 +20,21 @@ bcrypt = Bcrypt()
 jwt = JWTManager()
 
 def create_app():
+
     app = Flask(__name__)
     app.config.from_object('config.Config')
+
+    load_dotenv()
+
+    app = Flask(__name__)
+
+    
+    app.config.from_object('app.config.Config')
+
+   
+    CORS(app)
+
+   
     db.init_app(app)
     migrate.init_app(app, db)
     bcrypt.init_app(app)
@@ -36,20 +53,24 @@ def create_app():
     app.register_blueprint(booking_bp, url_prefix='/api/bookings')
     app.register_blueprint(employee_bp, url_prefix='/api/employees')
 
-    from models import *  
-
 
   
     @app.route("/")
+
+    @app.route('/')
+
     def index():
         return {"message": "Backend API is running!"}
-
-
 
    
     # with app.app_context():
     #     db.create_all()
 
     # import models
+=======
+    # Auto-create all DB tables
+    with app.app_context():
+        db.create_all()
+
 
     return app
