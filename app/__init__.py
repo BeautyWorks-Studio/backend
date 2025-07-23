@@ -48,4 +48,3 @@ def create_app():
     # import models
 
     return app
-
