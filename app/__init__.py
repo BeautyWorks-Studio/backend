@@ -36,10 +36,15 @@ def create_app():
     app.register_blueprint(booking_bp, url_prefix='/api/bookings')
     app.register_blueprint(employee_bp, url_prefix='/api/employees')
 
+    from models import *  
+
+
   
     @app.route("/")
     def index():
         return {"message": "Backend API is running!"}
+
+
 
    
     # with app.app_context():

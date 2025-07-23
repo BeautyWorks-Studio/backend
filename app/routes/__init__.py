@@ -4,7 +4,7 @@ from .order_routes import order_bp
 from .booking_routes import booking_bp
 from .employee_routes import employee_bp
 from . import auth_routes
-
+from .table_routes import table_bp
 
 def register_routes(app):
     app.register_blueprint(auth_bp, url_prefix='/auth')
@@ -12,7 +12,8 @@ def register_routes(app):
     app.register_blueprint(order_bp, url_prefix='/orders')
     app.register_blueprint(booking_bp, url_prefix='/bookings')
     app.register_blueprint(employee_bp, url_prefix='/employees')
-    # app.register_blueprint(payment_bp, url_prefix='/payments')
-    # app.register_blueprint(service_bp, url_prefix='/services')
-    # app.register_blueprint(user_bp, url_prefix='/users')
+    app.register_blueprint(table_bp, url_prefix='/tables')
+    app.register_blueprint(payment_bp, url_prefix='/payments')
+    app.register_blueprint(service_bp, url_prefix='/services')
+    app.register_blueprint(user_bp, url_prefix='/users')
 
