@@ -12,7 +12,7 @@ class Product(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     order_items = db.relationship('OrderItem', backref='product', lazy=True)
 
-     def to_dict(self):
+    def to_dict(self):
         return {
             "id": self.id,
             "name": self.name,

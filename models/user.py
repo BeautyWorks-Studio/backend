@@ -1,4 +1,5 @@
 from config import db
+from app import bcrypt
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
@@ -16,10 +17,13 @@ class User(db.Model):
     orders = relationship('Order', backref='user', lazy=True)
     bookings = relationship('Booking', backref='user', lazy=True)
 
-     def __init__(self, name, email, password_hash, role='user'):
+    def __init__(self, name, email, password_hash,phone=None, address=None, country=None, role='user'):
         self.name = name
         self.email = email
         self.password_hash = bcrypt.generate_password_hash(password_hash).decode('utf-8')
+        self.phone = phone
+        self.address = address
+        self.country = country
         self.role = role
 
     def check_password(self, password_hash):
