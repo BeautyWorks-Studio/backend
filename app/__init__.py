@@ -19,6 +19,8 @@ migrate = Migrate()
 bcrypt = Bcrypt()
 jwt = JWTManager()
 
+from models import *
+
 def create_app():
 
     app = Flask(__name__)
@@ -53,6 +55,8 @@ def create_app():
     app.register_blueprint(booking_bp, url_prefix='/api/bookings')
     app.register_blueprint(employee_bp, url_prefix='/api/employees')
 
+    
+
 
   
     @app.route("/")
@@ -63,11 +67,11 @@ def create_app():
         return {"message": "Backend API is running!"}
 
    
-    # with app.app_context():
-    #     db.create_all()
+    with app.app_context():
+        db.create_all()
 
     # import models
-=======
+
     # Auto-create all DB tables
     with app.app_context():
         db.create_all()
