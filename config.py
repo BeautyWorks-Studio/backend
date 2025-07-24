@@ -6,7 +6,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(basedir, '..', 'instance', 'app.db')}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'secret'
     JWT_SECRET_KEY = 'jwt-secret'
