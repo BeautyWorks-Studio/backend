@@ -1,11 +1,6 @@
 from flask import Blueprint, request, jsonify
-<<<<<<< HEAD
 from models.user import User
 from app.utils.auth import create_user, authenticate
-=======
-from app.models import User
-from app import db, bcrypt
->>>>>>> 73a97c5 (modified app/_init_.py modified app/config.py modified app/routes/auth_routes.py modified app/routes/product_routes.py)
 from flask_jwt_extended import create_access_token
 
 auth_bp = Blueprint("auth_bp", __name__)
