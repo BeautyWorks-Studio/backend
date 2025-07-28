@@ -3,26 +3,27 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 from config import Config
 from extensions import db, migrate, bcrypt, jwt  
-from models.user import User
-from models.employee import Employee
-from models.service import Service
-from models.booking import Booking
-from models.tables import Table
-# from models import *  
 
 def create_app():
     load_dotenv()
 
     app = Flask(__name__)
-    app.config.from_object(Config)
-    print("📦 Using DB:", app.config["SQLALCHEMY_DATABASE_URI"])
+    app.config.from_object('config.Config')
 
     db.init_app(app)
+    print("📦 Using DB:", app.config["SQLALCHEMY_DATABASE_URI"])
+
+   
     migrate.init_app(app, db)
     bcrypt.init_app(app)
     jwt.init_app(app)
     CORS(app)
 
+    from models.user import User
+    from models.employee import Employee
+    from models.service import Service
+    from models.booking import Booking
+    from models.tables import Table
 
     
      

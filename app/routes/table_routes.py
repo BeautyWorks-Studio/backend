@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from config import db
+from extensions import db
 from models.tables import Table
 
 table_bp = Blueprint('table_bp', __name__)
