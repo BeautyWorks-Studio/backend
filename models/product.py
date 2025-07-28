@@ -1,9 +1,10 @@
-from app import db  # or from app.extensions import db if you use separate extensions
+from app import db
 
 class Product(db.Model):
-    __tablename__ = 'products'
-
+    __tablename__="products"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String(120), nullable=False)
+    description = db.Column(db.Text)
     price = db.Column(db.Float, nullable=False)
-    # ... any other fields ...
+    stock_quantity = db.Column(db.Integer, nullable=False)
+    order_items = db.relationship('OrderItem', backref='product', lazy=True)
