@@ -2,10 +2,7 @@ from app import db, bcrypt
 from datetime import datetime
 
 class User(db.Model):
-    _tablename_ = 'users'
-
     __tablename__ = 'users'
-
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
@@ -16,11 +13,12 @@ class User(db.Model):
 
     def _init_(self, name, email, password, role='user'):
 
-    role = db.Column(db.String(20), default='user') 
-    phone = db.Column(db.String(20))
-    address = db.Column(db.String(255))
-    country = db.Column(db.String(10))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+        role = db.Column(db.String(20), default='user') 
+        phone = db.Column(db.String(20))
+        address = db.Column(db.String(255))
+        country = db.Column(db.String(10))
+        created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __init__(self, name, email, password, phone=None, address=None, country=None, role='user'):
         self.name = name
