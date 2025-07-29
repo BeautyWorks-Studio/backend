@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from config import db
+from extensions import db
 from models.booking import Booking
 from models.service import Service
 from models.user import User
