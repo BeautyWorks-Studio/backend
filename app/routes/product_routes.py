@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from app.models import Product
-from app import db
+from models import Product
+from extensions import db
 from flask_jwt_extended import jwt_required
 from app.utils.decorators import role_required
 

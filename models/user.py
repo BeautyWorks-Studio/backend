@@ -8,14 +8,20 @@ class User(db.Model):
     name = db.Column(db.String(120))
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
-    role = db.Column(db.String(20), default='user')  # 'admin', 'staff', 'user'
+    role = db.Column(db.String(20), default='user') 
+    phone = db.Column(db.String(20))
+    address = db.Column(db.String(255))
+    country = db.Column(db.String(10))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self, name, email, password, role='user'):
+    def __init__(self, name, email, password, phone=None, address=None, country=None, role='user'):
         self.name = name
         self.email = email
         self.password = bcrypt.generate_password_hash(password).decode('utf-8')
         self.role = role
+        self.phone = phone
+        self.address = address
+        self.country = country
 
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password, password)
@@ -26,5 +32,8 @@ class User(db.Model):
             "name": self.name,
             "email": self.email,
             "role": self.role,
+            "phone":self.phone,
+            "address":self.address,
+            "country":self.country,
             "created_at": self.created_at
         }

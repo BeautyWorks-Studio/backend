@@ -1,10 +1,12 @@
-from app import create_app, db, bcrypt
-from app.models.user import User
-from app.models.product import Product
-from app.models.service import Service
-from app.models.employee import Employee
-from app.models.tables import Table
-from app.models.booking import Booking
+from datetime import datetime
+from app import create_app,  bcrypt
+from extensions import db
+from models.user import User
+from models.product import Product
+from models.service import Service
+from models.employee import Employee
+from models.tables import Table
+from models.booking import Booking
 
 app = create_app()
 print("�� Using DB:", app.config["SQLALCHEMY_DATABASE_URI"])
@@ -45,12 +47,16 @@ with app.app_context():
         name='Makeup',
         description='Glowing skin.',
         price=75000.00,
+        stock=10, 
+        created_at=datetime.utcnow()
         
     )
     product2 = Product(
         name='Garnier',
         description='Removes acne.',
         price=15000.00,
+        stock=10, 
+        created_at=datetime.utcnow()
        
     )
 
