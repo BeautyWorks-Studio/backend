@@ -11,7 +11,7 @@ class User(db.Model):
     name = db.Column(db.String(120))
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
-    role = db.Column(db.String(20), default='user')  # 'admin', 'staff', 'user'
+    role = db.Column(db.String(20), default='user')  
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def _init_(self, name, email, password, role='user'):
