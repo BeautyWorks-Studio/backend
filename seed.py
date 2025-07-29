@@ -42,16 +42,16 @@ with app.app_context():
     )
 
     product1 = Product(
-        name='Luxury Car',
-        description='A luxury vehicle with leather seats and high-end features.',
+        name='Makeup',
+        description='Glowing skin.',
         price=75000.00,
-        image_url='https://example.com/images/luxury-car.jpg'
+        
     )
     product2 = Product(
-        name='Sports Bike',
-        description='A high-speed bike perfect for racing enthusiasts.',
+        name='Garnier',
+        description='Removes acne.',
         price=15000.00,
-        image_url='https://example.com/images/sports-bike.jpg'
+       
     )
 
     service1 = Service(name='Pedicure', duration_minutes=60, price=2500)

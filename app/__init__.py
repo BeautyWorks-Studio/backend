@@ -19,14 +19,27 @@ load_dotenv()
 
 def create_app():
     app = Flask(__name__)
+    app.config.from_object('config.Config')
+
+    db.init_app(app)
+    print("📦 Using DB:", app.config["SQLALCHEMY_DATABASE_URI"])
     app.config.from_object(Config)
     print("Using DB:", app.config["SQLALCHEMY_DATABASE_URI"])
 
-    db.init_app(app)
+   
     migrate.init_app(app, db)
     bcrypt.init_app(app)
     jwt.init_app(app)
     CORS(app)
+
+    from models.user import User
+    from models.employee import Employee
+    from models.service import Service
+    from models.booking import Booking
+    from models.tables import Table
+
+    
+     
 
     from app.routes.auth_routes import auth_bp
     from app.routes.product_routes import product_bp
