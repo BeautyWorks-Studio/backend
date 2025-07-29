@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 from models.user import User
 from models.product import Product
 from models.order import Order
@@ -12,4 +10,4 @@ from models.booking import Booking
 from models.payment import Payment
 
 
->>>>>>> bf077c205139f09a8af9bd14999771b1700e4f7a
+
