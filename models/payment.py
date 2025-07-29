@@ -10,3 +10,5 @@ class Payment(db.Model):
     payment_method = db.Column(db.String(50)) 
     amount = db.Column(db.Float)
     payment_date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    booking = db.relationship("Booking", back_populates="payment")
