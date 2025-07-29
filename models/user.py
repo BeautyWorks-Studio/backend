@@ -41,7 +41,7 @@ class User(db.Model):
             "email": self.email,
             "role": self.role,
 
-            "created_at": self.create
+            "created_at": self.create,
             "phone":self.phone,
             "address":self.address,
             "country":self.country,
