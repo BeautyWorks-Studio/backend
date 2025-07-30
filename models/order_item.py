@@ -1,13 +1,9 @@
+from mongoengine import EmbeddedDocument, StringField, FloatField, IntField
 
-from app.extensions import db
-
-from extensions import db
-
-
-class OrderItem(db.Model):
-    __tablename__="orderitems"
-    id = db.Column(db.Integer, primary_key=True)
-    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
-    product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
-    quantity = db.Column(db.Integer, nullable=False)
-    price = db.Column(db.Float, nullable=False)
+class OrderItem(EmbeddedDocument):
+    __tablename__="order-items"
+    product_id = StringField(required=True)
+    name = StringField(required=True)
+    price = FloatField(required=True)
+    quantity = IntField(required=True)
+    size = StringField()

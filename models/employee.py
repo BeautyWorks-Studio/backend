@@ -1,14 +1,9 @@
-from extensions import db 
+from mongoengine import Document, StringField, EmailField, DateTimeField
+from datetime import datetime
 
-class Employee(db.Model):
-    __tablename__ = 'employees'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    phone = db.Column(db.String(20))
-    role = db.Column(db.String(50)) 
-
-
-    services = db.relationship("EmployeeService", back_populates="employee")
-    bookings = db.relationship("Booking", backref="employee")
+class Employee(Document):
+    __tablename__="employees"
+    name = StringField(required=True)
+    email = EmailField(required=True, unique=True)
+    role = StringField(required=True)  
+    hired_at = DateTimeField(default=datetime.utcnow)

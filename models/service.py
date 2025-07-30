@@ -1,9 +1,8 @@
-from extensions import db
+from mongoengine import Document, StringField, FloatField, IntField
 
-class Service(db.Model):
+class Service(Document):
     __tablename__="services"
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), nullable=False)
-    duration_minutes = db.Column(db.Integer, nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    bookings = db.relationship('Booking', backref='service', lazy=True)
+    name = StringField(required=True)
+    description = StringField()
+    price = FloatField(required=True)
+    duration_minutes = IntField(default=30)

@@ -1,12 +1,14 @@
-from extensions import db
+from mongoengine import Document, StringField, ListField, EmbeddedDocumentField, FloatField, BooleanField, DateTimeField
+from .order_item_model import OrderItem
 from datetime import datetime
 
-class Order(db.Model):
+class Order(Document):
     __tablename__="orders"
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    total_amount = db.Column(db.Float, nullable=False)
-    status = db.Column(db.String(50), default='pending')
-    items = db.relationship('OrderItem', backref='order', lazy=True)
-    payment = db.relationship('Payment', backref='order', uselist=False)
+    user_id = StringField(required=True)
+    items = ListField(EmbeddedDocumentField(OrderItem))
+    amount = FloatField(required=True)
+    address = StringField(required=True)
+    status = StringField(default="Order Placed")
+    payment_method = StringField(required=True)   
+    payment_status = BooleanField(default=False)
+    created_at = DateTimeField(default=datetime.utcnow)

@@ -1,14 +1,11 @@
-from extensions import db
+from mongoengine import Document, StringField, FloatField, DateTimeField
 from datetime import datetime
 
-
-class Payment(db.Model):
+class Payment(Document):
     __tablename__="payments"
-    id = db.Column(db.Integer, primary_key=True)
-    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"), nullable=True)
-    booking_id = db.Column(db.Integer, db.ForeignKey("bookings.id"), nullable=True)
-    payment_method = db.Column(db.String(50)) 
-    amount = db.Column(db.Float)
-    payment_date = db.Column(db.DateTime, default=datetime.utcnow)
-
-    booking = db.relationship("Booking", back_populates="payment")
+    order_id = StringField(required=True)
+    method = StringField(required=True) 
+    transaction_id = StringField()
+    amount = FloatField(required=True)
+    status = StringField(default="pending")
+    created_at = DateTimeField(default=datetime.utcnow)
