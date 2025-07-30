@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from flask_bcrypt import Bcrypt
 import jwt, os
-from app.models.user_model import User
+from app.models.user import User
 from mongoengine.errors import NotUniqueError
 
 bcrypt = Bcrypt()

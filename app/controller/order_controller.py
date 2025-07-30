@@ -1,7 +1,7 @@
 from flask import request, jsonify
-from app.models.order_model import Order
-from app.models.user_model import User
-from app.models.order_item_model import OrderItem
+from app.models.order import Order
+from app.models.user import User
+from app.models.order_item import OrderItem
 from datetime import datetime
 from app.middleware.auth import token_required
 

@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.models.product_model import Product
+from app.models.product import Product
 from app.config.cloudinary_config import cloudinary
 
 def add_product():
