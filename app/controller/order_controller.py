@@ -32,7 +32,7 @@ def place_order():
 
 
 @token_required
-def get_user_orders():
+def user_orders():
     orders = Order.objects(user_id=request.user_id)
     return jsonify({
         "success": True,
@@ -40,7 +40,7 @@ def get_user_orders():
     })
 
 
-def all_orders(req=None):  # Renamed from get_all_orders to match import
+def all_orders(req=None):
     orders = Order.objects()
     return jsonify({
         "success": True,
@@ -48,7 +48,7 @@ def all_orders(req=None):  # Renamed from get_all_orders to match import
     })
 
 
-def update_order_status():
+def update_status():
     data = request.get_json()
     order_id = data.get("orderId")
     status = data.get("status")

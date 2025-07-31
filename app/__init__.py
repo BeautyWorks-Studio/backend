@@ -1,8 +1,9 @@
 from flask import Flask
 from flask_cors import CORS
-from mongoengine import connect
 from dotenv import load_dotenv
 import os
+
+from app.extensions import init_db
 
 load_dotenv()
 
@@ -10,13 +11,8 @@ def create_app():
     app = Flask(__name__)
     CORS(app)
 
-    app.config["MONGODB_SETTINGS"] = {
-        "host": os.getenv("MONGODB_URI")
-    }
+    init_db(app)
 
-    connect(host=app.config["MONGODB_SETTINGS"]["host"])
-
-    
     from app.routes.auth_routes import auth_bp
     from app.routes.product_routes import product_bp
     from app.routes.cart_routes import cart_bp
@@ -40,3 +36,4 @@ def create_app():
         return {"message": "Backend API is running!"}
 
     return app
+

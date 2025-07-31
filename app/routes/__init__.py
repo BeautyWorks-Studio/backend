@@ -4,7 +4,6 @@ from .order_routes import order_bp
 from .booking_routes import booking_bp
 from .employee_routes import employee_bp
 from . import auth_routes
-from .table_routes import table_bp
 
 def register_routes(app):
     app.register_blueprint(auth_bp, url_prefix='/auth')
