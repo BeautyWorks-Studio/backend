@@ -6,4 +6,5 @@ class Employee(Document):
     name = StringField(required=True)
     email = EmailField(required=True, unique=True)
     role = StringField(required=True)  
+    phone = StringField() 
     hired_at = DateTimeField(default=datetime.utcnow)

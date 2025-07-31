@@ -1,10 +1,9 @@
 from flask import Blueprint, request, jsonify
 from extensions import db
-from models.booking import Booking
-from models.service import Service
-from models.user import User
-from models.employee import Employee
-from models.tables import Table
+from app.models.booking import Booking
+from app.models.service import Service
+from app.models.user import User
+from app.models.employee import Employee
 
 booking_bp = Blueprint('booking_bp', __name__)
 

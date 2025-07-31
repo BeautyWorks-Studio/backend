@@ -1,6 +1,6 @@
 from flask import request, jsonify
-from app.models.payment_model import Payment
-from app.models.order_model import Order
+from app.models.payment import Payment
+from app.models.order import Order
 import stripe, razorpay, os
 from dotenv import load_dotenv
 load_dotenv()

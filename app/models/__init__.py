@@ -1,11 +1,11 @@
-from models.user import User
-from models.product import Product
-from models.order import Order
-from models.order_item import OrderItem
-from models.service import Service
-from models.employee import Employee
-from models.booking import Booking
-from models.payment import Payment
+from .user import User
+from .product import Product
+from .order import Order
+from .order_item import OrderItem
+from .service import Service
+from .employee import Employee
+from .booking import Booking
+from .payment import Payment
 
 
 

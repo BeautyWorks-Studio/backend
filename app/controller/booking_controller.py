@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.models.booking_model import Booking
+from app.models.booking import Booking
 from datetime import datetime
 from app.middleware.auth import token_required
 

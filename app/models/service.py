@@ -5,4 +5,4 @@ class Service(Document):
     name = StringField(required=True)
     description = StringField()
     price = FloatField(required=True)
-    duration_minutes = IntField(default=30)
+    duration = IntField(default=30)

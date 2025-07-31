@@ -1,5 +1,5 @@
 from mongoengine import Document, StringField, ListField, EmbeddedDocumentField, FloatField, BooleanField, DateTimeField
-from .order_item_model import OrderItem
+from .order_item import OrderItem
 from datetime import datetime
 
 class Order(Document):

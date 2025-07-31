@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.models.service_model import Service
+from app.models.service import Service
 
 def create_service():
     data = request.get_json()

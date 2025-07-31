@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.models.employee_model import Employee
+from app.models.employee import Employee
 
 def create_employee():
     data = request.get_json()

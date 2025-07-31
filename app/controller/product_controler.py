@@ -1,6 +1,7 @@
 from flask import request, jsonify
 from app.models.product import Product
 from app.config.cloudinary_config import cloudinary
+from bson import ObjectId
 
 def add_product():
     try:
@@ -18,29 +19,45 @@ def add_product():
             price=float(data.get("price")),
             category=data.get("category"),
             sub_category=data.get("subCategory"),
-            sizes=data.get("sizes").split(","),
-            bestseller=data.get("bestseller") == "true",
+            sizes=[s.strip() for s in data.get("sizes", "").split(",")],
+            bestseller=data.get("bestseller", "false").lower() == "true",
             image_urls=image_urls
         ).save()
 
         return jsonify({"success": True, "message": "Product added", "id": str(product.id)})
+
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 400
 
+
 def list_products():
     products = Product.objects()
-    return jsonify({"success": True, "products": [p.to_mongo().to_dict() for p in products]})
+    product_list = []
+    for p in products:
+        prod = p.to_mongo().to_dict()
+        prod["id"] = str(prod["_id"])
+        del prod["_id"]
+        product_list.append(prod)
+    return jsonify({"success": True, "products": product_list})
 
-def get_product():
-    data = request.get_json()
-    product_id = data.get("productId")
+
+def get_product(product_id):
     product = Product.objects(id=product_id).first()
     if not product:
         return jsonify({"success": False, "message": "Product not found"}), 404
-    return jsonify({"success": True, "product": product.to_mongo().to_dict()})
+    
+    prod = product.to_mongo().to_dict()
+    prod["id"] = str(prod["_id"])
+    del prod["_id"]
+    return jsonify({"success": True, "product": prod})
+
 
 def delete_product():
     data = request.get_json()
     product_id = data.get("id")
-    Product.objects(id=product_id).delete()
+    product = Product.objects(id=product_id).first()
+    if not product:
+        return jsonify({"success": False, "message": "Product not found"}), 404
+
+    product.delete()
     return jsonify({"success": True, "message": "Product deleted"})

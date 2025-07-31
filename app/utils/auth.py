@@ -1,8 +1,9 @@
-from models import User
-from app import db, bcrypt
+from app.models.user import User
+from werkzeug.security import generate_password_hash, check_password_hash
+#from app import db, bcrypt
 
 def create_user(username, password):
-    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+    hashed_pw = generate_password_hash(plain_password)
     user = User(username=username, password=hashed_password)
     db.session.add(user)
     db.session.commit()

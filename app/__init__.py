@@ -16,7 +16,7 @@ def create_app():
 
     connect(host=app.config["MONGODB_SETTINGS"]["host"])
 
-    # Register routes
+    
     from app.routes.auth_routes import auth_bp
     from app.routes.product_routes import product_bp
     from app.routes.cart_routes import cart_bp

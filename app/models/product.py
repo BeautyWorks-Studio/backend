@@ -9,6 +9,7 @@ class Product(Document):
     category = StringField()
     sub_category = StringField()
     image_urls = ListField(StringField())
+    date = DateTimeField(default=datetime.utcnow) 
     sizes = ListField(StringField())
     bestseller = BooleanField(default=False)
     created_at = DateTimeField(default=datetime.utcnow)
