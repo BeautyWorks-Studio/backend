@@ -33,15 +33,20 @@ def add_product():
 def list_products():
     products = Product.objects()
     product_list = []
+
     for p in products:
         prod = p.to_mongo().to_dict()
         prod["id"] = str(prod["_id"])
         del prod["_id"]
         product_list.append(prod)
+
     return jsonify({"success": True, "products": product_list})
 
 
-def get_product(product_id):
+def single_product():
+    data = request.get_json()
+    product_id = data.get("id")
+
     product = Product.objects(id=product_id).first()
     if not product:
         return jsonify({"success": False, "message": "Product not found"}), 404
@@ -49,15 +54,18 @@ def get_product(product_id):
     prod = product.to_mongo().to_dict()
     prod["id"] = str(prod["_id"])
     del prod["_id"]
+
     return jsonify({"success": True, "product": prod})
 
 
-def delete_product():
+def remove_product():
     data = request.get_json()
     product_id = data.get("id")
+
     product = Product.objects(id=product_id).first()
     if not product:
         return jsonify({"success": False, "message": "Product not found"}), 404
 
     product.delete()
     return jsonify({"success": True, "message": "Product deleted"})
+

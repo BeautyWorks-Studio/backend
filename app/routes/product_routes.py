@@ -1,14 +1,31 @@
-from flask import Blueprint
-from app.controllers.product_controller import (
-    add_product,
+from flask import Blueprint, request
+from app.middleware.admin_auth import admin_auth
+from app.middleware.upload_middleware import handle_uploads
+from app.controller.product_controler import (
     list_products,
-    get_product,
-    delete_product
+    add_product,
+    remove_product,
+    single_product
 )
 
-product_bp = Blueprint("product_bp", __name__)
+product_bp = Blueprint('product', __name__, url_prefix='/api/products')
 
-product_bp.route("/", methods=["POST"])(add_product)
-product_bp.route("/", methods=["GET"])(list_products)
-product_bp.route("/<product_id>", methods=["GET"])(get_product)
-product_bp.route("/delete", methods=["POST"])(delete_product)
+@product_bp.route('/add', methods=['POST'])
+@admin_auth
+@handle_uploads(['image1', 'image2', 'image3', 'image4'])
+def add_product_route():
+    return add_product(request)
+
+@product_bp.route('/remove', methods=['POST'])
+@admin_auth
+def remove_product_route():
+    return remove_product(request)
+
+@product_bp.route('/single', methods=['POST'])
+def single_product_route():
+    return single_product(request)
+
+@product_bp.route('/list', methods=['GET'])
+def list_products_route():
+    return list_products()
+

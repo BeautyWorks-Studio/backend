@@ -1,6 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
 from app.middleware.auth import auth_user
-from app.controllers.cart_controller import get_user_cart, add_to_cart, update_cart
+from app.controller.cart_controller import get_user_cart, add_to_cart, update_cart
 
 cart_bp = Blueprint('cart', __name__, url_prefix='/api/cart')
 
@@ -18,3 +18,4 @@ def add_cart():
 @auth_user
 def update_cart_route():
     return update_cart(request)
+

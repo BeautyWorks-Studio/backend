@@ -1,6 +1,20 @@
-def handle_uploads(request):
+from functools import wraps
+from flask import request
+
+def handle_uploads(fields):
     """
-    Dummy handler for file uploads (replace with real logic later).
+    Decorator to handle file uploads.
+    fields: list of expected file field names.
     """
-    print("Handling file upload...")
-    return None
+    def decorator(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            print("Handling file upload...")
+            for field in fields:
+                if field in request.files:
+                    file = request.files[field]
+                    print(f"Received file for {field}: {file.filename}")
+            return f(*args, **kwargs)
+        return wrapper
+    return decorator
+
