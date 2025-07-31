@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: beauty-backend
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn wsgi:app"
+    envVars:
+      - key: MONGODB_URI
+        value: your-mongodb-uri
+      - key: CLOUDINARY_NAME
+        value: your-cloud-name
+      - key: CLOUDINARY_API_KEY
+        value: your-api-key
+      - key: CLOUDINARY_SECRET_KEY
+        value: your-api-secret
+      - key: STRIPE_SECRET_KEY
+        value: your-stripe-secret
