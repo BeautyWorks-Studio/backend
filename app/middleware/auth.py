@@ -23,4 +23,3 @@ def auth_user(func):
     return wrapper
 
 token_required = auth_user
-

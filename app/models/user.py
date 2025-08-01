@@ -1,9 +1,12 @@
-from mongoengine import Document, StringField, DictField, EmailField
+from mongoengine import Document, StringField, EmailField, DictField
 
 class User(Document):
-    __tablename__="users"
-    name = StringField(required=True)
+    username = StringField(required=True, unique=True)
     email = EmailField(required=True, unique=True)
     password = StringField(required=True)
-    cart_data = DictField(default={})
-    role = StringField(default="customer") 
+    cart_data = DictField(default=dict)
+
+    meta = {
+        'collection': 'users'
+    }
+

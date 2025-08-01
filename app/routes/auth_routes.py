@@ -34,4 +34,3 @@ def login():
         return jsonify(access_token=token), 200
 
     return jsonify({"error": "Invalid credentials"}), 401
-
